@@ -1,0 +1,7 @@
+flutter를 설치할 수 없거나, 설치하고싶지 않은 경우
+-> Dart Pad
+
+https://dartpad.dev/
+온라인에서 dart를 실행 가능, flutter도 웹에서 실행할 수 있음.
+Samples > Counter 선택
+새 파일을 생성할수는 없음.

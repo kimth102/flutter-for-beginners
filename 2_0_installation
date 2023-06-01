@@ -1,0 +1,31 @@
+1. SDK 설치
+2. 시뮬레이터 설치
+
+[ SDK 설치 ]
+공식 홈페이지 소개 방법
+1. flutter.dev 에서 get started
+2. install 페이지에서 운영체제에 맞춰 설치 진행
+    (zip 다운로드, path 설정 등)
+-> 번거로움.
+
+chocolatey 사용 방법 (Windows)
+1. https://chocolatey.org/install 접속하기
+2. individual 선택하기
+3. PowerShell 을 관리자 권한으로 실행
+4. Get-ExecutionPolicy 명령어 입력
+    Restricted가 뜨면 Set-ExecutionPolicy AllSigned or Set-ExecutionPolicy Bypass -Scope Process
+5. Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) 명령어 실행
+6. choco install flutter
+
+homebrew 사용 방법 (macOS)
+1. homebrew 설치
+2. brew install --cask flutter 
+
+[ 시뮬레이터 설치 ]
+어떤 걸 빌드할지에 따라 설치가 다름.
+https://docs.flutter.dev/get-started/install 에서 각 운영체제 별 문서 참고
+
+---
+
+flutter doctor
+무엇이 잘못되었는지 확인해주는 명령어

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:vibration/vibration.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,6 +20,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void onTick(Timer timer) {
     if (totalSeconds == 0) {
+      timer.cancel();
+      Vibration.vibrate(duration: 2000);
+
       setState(() {
         totalPomodoros = totalPomodoros + 1;
         isRunning = false;

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:toonflix/models/webtoon_model.dart';
 import 'package:toonflix/services/api_service.dart';
+import 'package:toonflix/widgets/webtoon_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
-  Future<List<WebtoonModel>> webtoons = ApiService.getTodaysToons();
+  final Future<List<WebtoonModel>> webtoons = ApiService.getTodaysToons();
 
   /* StatefulWidget에서 사용한 방법
   
@@ -46,10 +47,47 @@ class HomeScreen extends StatelessWidget {
         // snapshot : future의 상태
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return const Text('There is data!');
+            /* ListView: 최적화 되어있지 않음. 값을 한번에 다 가져옴.
+              return ListView(
+              children: [
+                for (var webtoon in snapshot.data!) Text(webtoon.title)
+              ],
+            );*/
+            return Column(
+              children: [
+                const SizedBox(
+                  height: 50,
+                ),
+                Expanded(child: makeList(snapshot)),
+              ],
+            );
           }
-          return const Text('Loading...');
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         },
+      ),
+    );
+  }
+
+  ListView makeList(AsyncSnapshot<List<WebtoonModel>> snapshot) {
+    return ListView.separated(
+      scrollDirection: Axis.horizontal,
+      itemCount: snapshot.data!.length,
+      padding: const EdgeInsets.symmetric(
+        vertical: 10,
+        horizontal: 20,
+      ),
+      itemBuilder: (context, index) {
+        var webtoon = snapshot.data![index];
+        return Webtoon(
+          title: webtoon.title,
+          thumb: webtoon.thumb,
+          id: webtoon.id,
+        );
+      },
+      separatorBuilder: (context, index) => const SizedBox(
+        width: 40,
       ),
     );
   }

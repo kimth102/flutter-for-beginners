@@ -1,0 +1,61 @@
+import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher_string.dart';
+import 'package:toonflix/models/webtoon_episode_model.dart';
+
+class Episode extends StatelessWidget {
+  const Episode({
+    super.key,
+    required this.webtoonId,
+    required this.episode,
+  });
+
+  final String webtoonId;
+  final WebtoonEpisodeModel episode;
+
+  onButtonTap() async {
+    await launchUrlString(
+        'https://comic.naver.com/webtoon/detail?titleId=$webtoonId&no=${int.parse(episode.id) + 1}');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onButtonTap,
+      child: Container(
+        margin: const EdgeInsets.only(
+          bottom: 4,
+        ),
+        decoration: BoxDecoration(
+          border: Border.all(
+            width: 1,
+            color: Colors.grey,
+          ),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 18,
+            horizontal: 20,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                episode.title,
+                style: const TextStyle(
+                  color: Colors.green,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const Icon(
+                Icons.chevron_right_rounded,
+                color: Colors.green,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
